@@ -21,11 +21,16 @@ export class ProductService {
     );
   }
 
-  // Get All Product and By Product Categories Id
+  // Get All Product and By Product Categories Id  without pagibnation
   public getAllProduct(endUrl:String ): Observable<Product[]> {
     return this.httpClient.get<GetResponseProduct>(this.baseUrl+endUrl).pipe(
       map(response => response._embedded.products)
     );
+  }
+
+  // Get All Product and By Product Categories Id  without pagibnation
+  public getAllProductByPageination(endUrl:String): Observable<GetResponseProductWithPageination> {
+    return this.httpClient.get<GetResponseProductWithPageination>(this.baseUrl+endUrl);
   }
 
   // Get products By Id
@@ -34,6 +39,20 @@ export class ProductService {
   }
 
 }
+
+interface GetResponseProductWithPageination {
+  _embedded: {
+    products: Product[];
+  },
+  page: {
+    size: number;
+    totalElements: number;
+    totalPages: number;
+    number:number;
+  }
+}
+
+
 
 interface GetResponseProduct {
   _embedded: {

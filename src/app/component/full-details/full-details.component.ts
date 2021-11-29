@@ -19,6 +19,6 @@ export class FullDetailsComponent implements OnInit {
   }
 
   private getProductById() {
-    this.productService.getProductById(+this.router.snapshot.paramMap.get("id")).subscribe( data => this.product = data);
+    this.productService.getProductById(Number(this.router.snapshot.paramMap.get("id"))).subscribe( data => this.product = data);
   }
 }
